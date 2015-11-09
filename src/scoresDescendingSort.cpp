@@ -15,11 +15,25 @@ NOTES:
 
 #include <stdio.h>
 
-struct student {
+struct student 
+{
 	char name[10];
 	int score;
 };
 
-void * scoresDescendingSort(struct student *students, int len) {
+void sortStudentScores(struct student *students, int len)
+{
+
+}
+
+void * scoresDescendingSort(struct student *students, int len) 
+{
+	if (students != NULL)
+	{
+		if (len > 0)
+			sortStudentScores(students, len);
+		else
+			students = NULL;
+	}
 	return NULL;
 }
