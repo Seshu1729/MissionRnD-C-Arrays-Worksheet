@@ -16,7 +16,7 @@ NOTES: Don't create new array, try to change the input array.
 
 void merge(int Arr[], int beg, int mid, int end, int len)
 {
-	int i = beg, j = mid + 1, index = beg, *temp, k, sameElements = 0;
+	int i = beg, j = mid + 1, index = beg, *temp, k;
 	temp = (int *)malloc(sizeof(int)*len);
 	while ((i <= mid) && (j <= end))
 	{
