@@ -14,6 +14,7 @@ NOTES:
 */
 
 #include <stdio.h>
+#include<stdlib.h>
 
 struct student 
 {
@@ -21,17 +22,65 @@ struct student
 	int score;
 };
 
-void sortStudentScores(struct student *students, int len)
+void merge(struct student *students, int beg, int mid, int end, int len)
 {
-
+	long int i = beg, j = mid + 1, index = beg, k;
+	struct student *temp;
+	temp = (struct student *)malloc(sizeof(struct student)*len);
+	while ((i <= mid) && (j <= end))
+	{
+		if (students[i].score>students[j].score)
+		{
+			temp[index] = students[i];
+			i++;
+		}
+		else
+		{
+			temp[index] = students[j];
+			j++;
+		}
+		index++;
+	}
+	if (i>mid)
+	{
+		while (j <= end)
+		{
+			temp[index] = students[j];
+			j++;
+			index++;
+		}
+	}
+	else
+	{
+		while (i <= mid)
+		{
+			temp[index] = students[i];
+			i++;
+			index++;
+		}
+	}
+	for (k = beg; k<index; k++)
+		students[k] = temp[k];
 }
 
-void * scoresDescendingSort(struct student *students, int len) 
+void merge_sort(struct student *students, int beg, int end, int len)
+{
+	int mid;
+	if (beg<end)
+	{
+		mid = (beg + end) / 2;
+		merge_sort(students, beg, mid, len);
+		merge_sort(students, mid + 1, end, len);
+		merge(students, beg, mid, end, len);
+	}
+}
+
+void * scoresDescendingSort(struct student *students, int len)
 {
 	if (students != NULL)
 	{
 		if (len > 0)
-			sortStudentScores(students, len);
+			merge_sort(students, 0, len - 1, len);
 		else
 			students = NULL;
 	}
