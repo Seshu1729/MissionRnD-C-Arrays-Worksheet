@@ -56,7 +56,7 @@ void * studentsCount(int *Arr, int len, int score, int *lessCount, int *moreCoun
 			*moreCount = len - *moreCount;
 		}
 		else
-			Arr = NULL;
+			return NULL;
 	}
-	return NULL;
+	return Arr;
 }
