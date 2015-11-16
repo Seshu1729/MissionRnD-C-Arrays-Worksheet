@@ -22,6 +22,7 @@ int *trim(int *result, int *count)
 		if (result[index] != 0)
 			result[(*count)++] = result[index];
 	}
+	result = (int *)realloc(result, sizeof(int)*(*count));
 	return result;
 }
 
