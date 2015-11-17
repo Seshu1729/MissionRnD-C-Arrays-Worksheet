@@ -14,38 +14,6 @@ NOTES: Don't create new array, try to change the input array.
 #include <stdio.h>
 #include<stdlib.h>
 
-int *trim(int *result, int *count)
-{
-	int index;
-	for (index = 0; index < 10; index++)
-	{
-		if (result[index] != 0)
-			result[(*count)++] = result[index];
-	}
-	result = (int *)realloc(result, sizeof(int)*(*count));
-	return result;
-}
-
-void * removeArrayDuplicates(int *Arr, int len)
-{
-	int *result, i, count = 0;
-	if (len < 1 || Arr == NULL)
-		return NULL;
-	result = (int *)calloc(10, sizeof(int));
-	for (i = 0; i < len; i++)
-	{
-		if (result[Arr[i]] == 0)
-			result[Arr[i]] = Arr[i];
-	}
-	result = trim(result, &count);
-	for (i = 0; i < count; i++)
-		Arr[i] = result[i];
-	return result;
-}
-
-/*
-
-METHOD 2:
 void merge(int Arr[], int beg, int mid, int end, int len)
 {
 	int i = beg, j = mid + 1, index = beg, *temp, k;
@@ -110,5 +78,3 @@ void * removeArrayDuplicates(int *Arr, int len)
 	}
 	return NULL;
 }
-
-*/
