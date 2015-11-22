@@ -89,9 +89,6 @@ struct student ** topKStudents(struct student *students, int len, int K)
 	}
 	result = (struct student **)malloc(sizeof(struct node *)*K);
 	for (i = 0; i < K; i++)
-	{
-		result[i] = (struct student *)malloc(sizeof(struct student));
 		result[i] = &students[i];
-	}
 	return result;
 }
