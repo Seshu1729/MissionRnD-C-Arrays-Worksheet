@@ -22,6 +22,66 @@ struct student
 	int score;
 };
 
+void heapUp(struct student **heap, int index)
+{
+	struct student *temp = heap[index];
+	while (index>0 && heap[((index + 1) / 2) - 1]->score>temp->score)
+	{
+		heap[index] = heap[((index + 1) / 2) - 1];
+		index = ((index + 1) / 2) - 1;
+	}
+	heap[index] = temp;
+}
+
+void heapDown(struct student **heap, int index, int length)
+{
+	struct student *value = heap[index];
+	int child = (index * 2) + 1;
+	while (child <= length)
+	{
+		if (child<length&&heap[child]->score>heap[child + 1]->score)
+			child++;
+		if (heap[child]->score>heap[((child + 1) / 2) - 1]->score)
+			break;
+		heap[((child + 1) / 2) - 1] = heap[child];
+		child = (child * 2) + 1;
+	}
+	heap[((child + 1) / 2) - 1] = value;
+}
+
+struct student ** topKStudents(struct student *students, int len, int K)
+{
+	int index, duplen;
+	struct student **heap, *temp;
+	if (students != NULL)
+	{
+		if (len>0 && K > 0)
+		{
+			heap = (struct student **)malloc(sizeof(struct student *)*len);
+			for (index = 0; index < len; index++)
+			{
+				heap[index] = &students[index];
+				heapUp(heap, index);
+			}
+			duplen = len - 1;
+			for (index = 0; index <= len - K; index++)
+			{
+				temp = heap[0];
+				heap[0] = heap[duplen];
+				heap[duplen] = temp;
+				duplen--;
+				heapDown(heap, 0, duplen);
+			}
+			heap = (struct student **)realloc(heap, sizeof(struct student *)*K);
+		}
+		else
+			return NULL;
+	}
+	return heap;
+}
+
+/*
+METHOD 2:
 void merge1(struct student *students, int beg, int mid, int end, int len)
 {
 	long int i = beg, j = mid + 1, index = beg, k;
@@ -92,3 +152,5 @@ struct student ** topKStudents(struct student *students, int len, int K)
 		result[i] = &students[i];
 	return result;
 }
+
+*/
