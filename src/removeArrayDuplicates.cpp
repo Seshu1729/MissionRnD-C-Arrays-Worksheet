@@ -20,9 +20,14 @@ void merge(int Arr[], int beg, int mid, int end, int len, int *count)
 	temp = (int *)malloc(sizeof(int)*len);
 	while ((i <= mid) && (j <= end))
 	{
-		if (Arr[index - 1] == Arr[i] || Arr[index - 1] == Arr[j] || Arr[i] == Arr[j])
+		if (Arr[index - 1] == Arr[i] || Arr[i] == Arr[j])
 		{
 			i++;
+			(*count)++;
+		}
+		else if (Arr[index - 1] == Arr[j])
+		{
+			j++;
 			(*count)++;
 		}
 		else if (Arr[i]<Arr[j])
