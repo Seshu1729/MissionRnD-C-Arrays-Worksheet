@@ -22,6 +22,8 @@ struct student
 	int score;
 };
 
+//METHOD 1:
+
 void heapUp(struct student **heap, int index)
 {
 	struct student *temp = heap[index];
@@ -81,7 +83,9 @@ struct student ** topKStudents(struct student *students, int len, int K)
 }
 
 /*
+
 METHOD 2:
+
 void merge1(struct student *students, int beg, int mid, int end, int len)
 {
 	long int i = beg, j = mid + 1, index = beg, k;

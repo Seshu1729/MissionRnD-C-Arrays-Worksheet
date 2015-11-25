@@ -14,6 +14,8 @@ NOTES: Don't create new array, try to change the input array.
 #include <stdio.h>
 #include<stdlib.h>
 
+//METHOD 1:
+
 int partition(int Arr[],int beg,int end)
 {
 	int left, right, temp, loc, flag;
@@ -90,8 +92,45 @@ void * removeArrayDuplicates(int *Arr, int len)
 	return NULL;
 }
 
+
 /*
+
 METHOD 2:
+
+int removeDup(int *Arr,int len)
+{
+	int index1,index2;
+	for(index1=0;index1<len;index1++)
+	{
+		for(index2=index1+1;index2<len;index2++)
+		{
+			if(Arr[index1]==Arr[index2])
+				Arr[index2--] = Arr[(len--)-1];
+		}
+	}
+	return len;
+}
+
+void * removeArrayDuplicates(int *Arr, int len)
+{
+	int count, i;
+	if (Arr != NULL)
+	{
+		if (len > 0)
+		{
+			len=removeDup(Arr, len);
+			quicksort(Arr, 0, len - 1);
+		}
+		else
+			Arr = NULL;
+	}
+	return NULL;
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+METHOD 3:
+
 void merge(int Arr[], int beg, int mid, int end, int len, int *count)
 {
 	int i = beg, j = mid + 1, index = beg, *temp, k;
@@ -170,4 +209,5 @@ void * removeArrayDuplicates(int *Arr, int len)
 	}
 	return NULL;
 }
+
 */
